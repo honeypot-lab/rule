@@ -19,12 +19,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install check-jsonschema
 
-      - name: Download Sigma JSON schema
-        run: |
-          curl -L -o sigma-schema.json \
-            https://github.com/SigmaHQ/sigma-specification/blob/main/json-schema/sigma-detection-rule-schema.json
-
       - name: Validate rules
         run: |
-          check-jsonschema --schemafile sigma-schema.json sigma_rules/*.yml
-
+          # 공식 저장소의 Raw JSON 링크를 직접 사용하여 검증합니다.
+          check-jsonschema --schemafile https://raw.githubusercontent.com/SigmaHQ/sigma-specification/main/json-schema/sigma-detection-rule-schema.json sigma_rules/*.yml
