@@ -9,7 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: SigmaHQ/sigma-rules-validator@v1
+
+      - uses: actions/setup-python@v5
         with:
-          paths: |-
-            ./sigma_rules
+          python-version: "3.12"
+
+      - name: Install validator
+        run: |
+          python -m pip install --upgrade pip
+          pip install check-jsonschema
+
+      - name: Download Sigma JSON schema
+        run: |
+          curl -L -o sigma-schema.json \
+            https://raw.githubusercontent.com/SigmaHQ/sigma-specification/main/sigma-schema.json
+
+      - name: Validate rules
+        run: |
+          check-jsonschema --schemafile sigma-schema.json sigma_rules/**/*.yml sigma_rules/*.yml
