@@ -1,0 +1,15 @@
+name: Validate Sigma rules
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: SigmaHQ/sigma-rules-validator@v1
+        with:
+          paths: |-
+            ./sigma_rules
