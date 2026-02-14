@@ -1,0 +1,10 @@
+title: "필수 필드 누락 테스트"
+description: "logsource 필드가 없어서 검증에 실패해야 합니다."
+author: "Gemini"
+date: 2024/05/20
+# logsource가 빠짐
+detection:
+    selection:
+        EventID: 4624
+    condition: selection
+level: low
