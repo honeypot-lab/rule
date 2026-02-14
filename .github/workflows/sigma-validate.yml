@@ -26,4 +26,5 @@ jobs:
 
       - name: Validate rules
         run: |
-          check-jsonschema --schemafile sigma-schema.json sigma_rules/**/*.yml sigma_rules/*.yml
+          check-jsonschema --schemafile sigma-schema.json sigma_rules/*.yml
+

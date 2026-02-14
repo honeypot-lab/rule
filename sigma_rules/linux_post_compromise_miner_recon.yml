@@ -1,0 +1,60 @@
+title: Linux Post-Compromise Reconnaissance with Miner Process Checks
+id: 6f2c9e3a-8d41-4b7f-9a52-1c7e9b4d0a63
+status: experimental
+logsource:
+  product: linux
+  category: process_creation
+  service: audit
+detection:
+  selection_process_enum:
+    CommandLine|contains:
+      - ps
+      - top
+  selection_miner_keywords:
+    CommandLine|contains:
+      - miner
+      - xmrig
+      - crypt
+      - kdevtmpfsi
+      - kinsing
+  selection_cpu_recon:
+    CommandLine|contains:
+      - /proc/cpuinfo
+      - lscpu
+      - uname -m
+      - uname -a
+  selection_net_recon:
+    CommandLine|contains:
+      - ifconfig
+      - ip addr
+      - ip link
+      - ip a
+  condition: >-
+    selection_process_enum and selection_miner_keywords and (selection_cpu_recon or selection_net_recon)
+level: high
+description: |2-
+  This rule detects a post-compromise activity pattern commonly observed in Linux botnet and cryptominer intrusions.
+
+  The attacker performs system reconnaissance to identify CPU architecture and network configuration, followed by process enumeration to check for the presence of existing cryptocurrency miners.
+
+  Key behaviors include:
+
+  - Process enumeration using utilities such as ps or top
+  - Searching for miner-related processes (e.g., miner, xmrig)
+  - CPU architecture discovery via /proc/cpuinfo, lscpu, or uname
+  - Network interface discovery via ifconfig or ip commands
+
+  This activity typically indicates preparation for cryptominer deployment or conflict checks with existing botnet infections.
+
+  Reported by Team_D4rkn3ttz
+  Detected by @wa__ri2
+author: https://x.com/Team_D4rkn3ttz
+references:
+  - internal-honeypot-telemetry
+tags:
+  - attack.t1003.001
+  - malware.cryptominer
+  - malware.botnet
+  - phase.post_compromise
+  - platform.linux
+  - category.discovery_process
