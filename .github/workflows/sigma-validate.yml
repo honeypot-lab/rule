@@ -22,7 +22,7 @@ jobs:
       - name: Download Sigma JSON schema
         run: |
           curl -L -o sigma-schema.json \
-            https://raw.githubusercontent.com/SigmaHQ/sigma-specification/main/sigma-schema.json
+            https://github.com/SigmaHQ/sigma-specification/blob/main/json-schema/sigma-detection-rule-schema.json
 
       - name: Validate rules
         run: |
