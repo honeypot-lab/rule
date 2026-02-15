@@ -16,7 +16,7 @@ The rule monitors for the following behavioral indicators within a **5-minute wi
 ## 📊 Captured Attack Scenario
 The following alert was captured by our Cowrie honeypot, showing an attacker performing these exact reconnaissance steps:
 
-![alt text](image-1.png)
+![alt text](image.png)
 
 > **Analysis:** The attacker successfully logged in and immediately executed a sequence of commands to check system resources and network configuration, followed by a check for existing miner processes.
 
