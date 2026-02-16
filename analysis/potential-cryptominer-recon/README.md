@@ -30,11 +30,11 @@
 이 공격 패턴을 효과적으로 탐지하기 위해 두 가지 단계의 Sigma 룰을 구성하였습니다.
 
 ### A. 개별 이벤트 탐지 (Atomic Detection)
-- **파일명:** `../../sigma_rules/standard/miner_recon_events.yml`
+- **파일명:** [`../../sigma_rules/standard/miner_recon_events.yml`](../../sigma_rules/standard/miner_recon_events.yml)
 - **설명:** `/proc/cpuinfo` 접근이나 `ps | grep miner`와 같은 개별적인 정찰 행위를 식별합니다.
 
 ### B. 상관관계 분석 (Correlation Detection)
-- **파일명:** `../../sigma_rules/correlation/miner_recon_sequence.yml`
+- **파일명:** [`../../sigma_rules/correlation/miner_recon_sequence.yml`](../../sigma_rules/correlation/miner_recon_sequence.yml)
 - **설명:** 단일 명령어는 오탐의 소지가 있으므로, **5분 이내에 위 정찰 명령어 중 3개 이상이 동시에 발생**할 경우 고위험군으로 분류하여 알람을 생성합니다.
 
 ## 4. 대응 권고 사항
