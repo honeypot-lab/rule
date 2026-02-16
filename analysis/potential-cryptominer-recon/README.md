@@ -8,9 +8,28 @@
 - **위협 수준:** Medium (Reconnaissance)
 - **타겟 서비스:** SSH (Cowrie Honeypot)
 
-## 2. 공격 타임라인 및 분석 (Attack Lifecycle)
+## 2. TTP 분석 (MITRE ATT&CK Matrix)
+공격자의 행위를 MITRE ATT&CK 프레임워크에 기반하여 분류한 결과입니다.
 
-제공된 `sample.json` 로그에 따르면, 공격자는 세션 연결 후 약 2초 내에 다음의 정찰 명령어를 집중적으로 수행했습니다.
+| 전술 (Tactics) | 기법 ID | 기법명 (Technique) | 상세 행위 |
+|:---|:---|:---|:---|
+| **Discovery** | T1082 | System Information Discovery | `/proc/cpuinfo`를 통한 하드웨어 사양 확인 |
+| **Discovery** | T1016 | System Network Configuration Discovery | `ifconfig`를 통한 네트워크 구성 확인 |
+| **Discovery** | T1057 | Process Discovery | `ps | grep miner`로 경쟁 채굴기 탐색 |
+| **Discovery** | T1083 | File and Directory Discovery | `locate`를 이용한 특정 설정 파일 탐색 |
+
+## 3. IoC (Indicators of Compromise)
+본 정찰 행위와 관련된 주요 지표입니다.
+
+| 유형 | 값 (Value) | 비고 |
+|:---|:---|:---|
+| **IPv4** | `116.120.157.4` | 상습적인 SSH Brute-force 공격지 |
+| **Command** | `/ip cloud print` | MikroTik 장비 정찰 시그니처 |
+| **Command** | `ps | grep '[Mm]iner'` | 경쟁 프로세스 탐색 패턴 |
+
+## 4. 공격 타임라인 및 분석 (Attack Lifecycle)
+
+제공된 [`sample.json`](./sample.json) 로그에 따르면, 공격자는 세션 연결 후 약 2초 내에 다음의 정찰 명령어를 집중적으로 수행했습니다.
 
 | 시간 (UTC) | 명령어 (Input) | 분석 및 의도 |
 |:---|:---|:---|
@@ -25,7 +44,7 @@
 ![Recon Alert](./image.png)
 > **비고:** AbuseIPDB 기준 해당 IP는 100/100의 위험도를 가진 상습 공격지로 확인되었습니다.
 
-## 3. 탐지 전략 (Detection Strategy)
+## 5. 탐지 전략 (Detection Strategy)
 
 이 공격 패턴을 효과적으로 탐지하기 위해 두 가지 단계의 Sigma 룰을 구성하였습니다.
 
@@ -37,7 +56,7 @@
 - **파일명:** [`miner_recon_sequence.yml`](../../sigma_rules/correlation/miner_recon_sequence.yml)
 - **설명:** 단일 명령어는 오탐의 소지가 있으므로, **5분 이내에 위 정찰 명령어 중 3개 이상이 동시에 발생**할 경우 고위험군으로 분류하여 알람을 생성합니다.
 
-## 4. 대응 권고 사항
+## 6. 대응 권고 사항
 - 불필요한 시스템 정보 노출을 최소화하기 위해 `/proc` 파일 시스템에 대한 접근 권한 제어.
 - `ifconfig`, `ps` 등 시스템 관리 도구에 대한 비정상적인 호출 모니터링 강화.
 - 알려진 공격 IP(`116.120.157.4`)에 대한 방화벽 차단 조치.
