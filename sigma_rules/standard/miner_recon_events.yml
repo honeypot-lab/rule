@@ -4,7 +4,7 @@ status: experimental
 description: |
   Detects individual commands often used by cryptominer actors for system reconnaissance, 
   including CPU info checks, network discovery, and searching for competing miners.
-author: wa__ri2
+author: BISHOP1027
 date: 2026-02-16
 references:
   - internal-honeypot-telemetry

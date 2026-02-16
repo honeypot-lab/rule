@@ -4,7 +4,7 @@ status: experimental
 description: |
   Correlates multiple reconnaissance events from a single session within a 5-minute window. 
   This indicates a deliberate post-exploitation phase by a cryptominer actor.
-author: wa__ri2
+author: BISHOP1027
 date: 2026-02-16
 references:
   - internal-honeypot-telemetry

@@ -2,7 +2,7 @@ title: Suspicious Shell Script Download and Execution One-liner
 id: d1234567-89ab-cdef-0123-456789abcdef
 status: experimental
 description: Detects a common botnet pattern where a shell script is downloaded via wget/curl, granted full permissions (777), and executed immediately in a single line.
-author: wa__ri2
+author: BISHOP1027
 date: 2026-02-16
 logsource:
   product: linux
@@ -12,17 +12,28 @@ detection:
     selection_commands:
         - 'wget'
         - 'curl'
+        - 'sh'
+        - 'tftp'
+        - 'ftpget'
+        - 'busybox'
         - 'chmod 777'
         - 'chmod +x'
+
     selection_payloads:
         # 발견된 악성 파일명들을 리스트업
         - 'cat.sh'
         - 'ur0a.sh'
         - 'iran.*'
+        - 'run.sh'
+
     selection_oneliner:
         # 명령어 사이의 세미콜론이나 파이프 확인
         - '; ./'
         - ';./'
+        
+    selection_cleanup:
+        - 'rm -rf'
+        - 'rm -f'
     condition: all of selection_commands and 1 of selection_payloads
 level: high
 tags:

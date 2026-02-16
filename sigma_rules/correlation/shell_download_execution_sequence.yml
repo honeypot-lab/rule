@@ -3,7 +3,7 @@ id: c1b2a3d4-e5f6-7890-abcd-1234567890ab
 status: experimental
 description: |
   Correlates the sequential behavior of a shell one-liner payload followed by a 'ps' command to verify successful execution.
-author: wa__ri2
+author: BISHOP1027
 date: 2026-02-16
 correlation:
   type: temporal_ordered

