@@ -1,0 +1,26 @@
+title: Iranbot Malware Components Detection
+id: d1234567-89ab-cdef-0123-456789abcdef
+status: experimental
+description: |
+  Detects specific command components used in Iranbot malware deployment, 
+  including its unique signature 'iranbot_was_here' and the sequential cleanup/download/execute pattern.
+author: wa__ri2
+date: 2026-02-16
+logsource:
+  product: linux
+  category: honeypot
+  service: cowrie
+detection:
+  selection_signature:
+    input|contains: 'iranbot_was_here'
+  selection_cleanup:
+    input|contains: 'rm -rf iran.*'
+  selection_download:
+    input|contains: 'wget http://45.153.34.52/cat.sh'
+  selection_execute:
+    input|contains: './cat.sh'
+  condition: 1 of selection_*
+level: high
+tags:
+  - attack.t1059.004
+  - attack.t1105

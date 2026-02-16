@@ -1,0 +1,21 @@
+title: Iranbot Malware Deployment Sequence
+id: c1b2a3d4-e5f6-7890-abcd-1234567890ab
+status: experimental
+description: |
+  Correlates the detection of Iranbot signature and its subsequent execution steps. 
+  The use of one-liner payloads followed by process checks (ps) is a strong indicator of this botnet.
+author: wa__ri2
+date: 2026-02-16
+correlation:
+  type: temporal_ordered
+  rules:
+    - d1234567-89ab-cdef-0123-456789abcdef  
+  group-by:
+    - src_ip
+    - session
+  timespan: 1m
+  condition:
+    gte: 2  
+level: critical
+tags:
+  - attack.execution

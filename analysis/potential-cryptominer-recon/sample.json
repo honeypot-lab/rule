@@ -1,0 +1,90 @@
+[
+  {
+    "eventid": "cowrie.command.input",
+    "input": "/ip cloud print",
+    "message": "CMD: /ip cloud print",
+    "sensor": "1d5da8138576",
+    "uuid": "d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+    "timestamp": "2026-02-08T02:47:01.996600Z",
+    "src_ip": "116.120.157.4",
+    "session": "54a802218b61",
+    "protocol": "ssh"
+  },
+  {
+    "eventid": "cowrie.command.failed",
+    "input": "/ip cloud print",
+    "message": "Command not found: /ip cloud print",
+    "sensor": "1d5da8138576",
+    "uuid": "d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+    "timestamp": "2026-02-08T02:47:01.997531Z",
+    "src_ip": "116.120.157.4",
+    "session": "54a802218b61",
+    "protocol": "ssh"
+  },
+  {
+    "eventid": "cowrie.command.input",
+    "input": "ifconfig",
+    "message": "CMD: ifconfig",
+    "sensor": "1d5da8138576",
+    "uuid": "d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+    "timestamp": "2026-02-08T02:47:02.185613Z",
+    "src_ip": "116.120.157.4",
+    "session": "54a802218b61",
+    "protocol": "ssh"
+  },
+  {
+    "eventid": "cowrie.command.input",
+    "input": "cat /proc/cpuinfo",
+    "message": "CMD: cat /proc/cpuinfo",
+    "sensor": "1d5da8138576",
+    "uuid": "d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+    "timestamp": "2026-02-08T02:47:02.554216Z",
+    "src_ip": "116.120.157.4",
+    "session": "54a802218b61",
+    "protocol": "ssh"
+  },
+  {
+    "eventid": "cowrie.command.input",
+    "input": "ps | grep '[Mm]iner'",
+    "message": "CMD: ps | grep '[Mm]iner'",
+    "sensor": "1d5da8138576",
+    "uuid": "d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+    "timestamp": "2026-02-08T02:47:02.696880Z",
+    "src_ip": "116.120.157.4",
+    "session": "54a802218b61",
+    "protocol": "ssh"
+  },
+  {
+    "eventid": "cowrie.command.input",
+    "input": "ps -ef | grep '[Mm]iner'",
+    "message": "CMD: ps -ef | grep '[Mm]iner'",
+    "sensor": "1d5da8138576",
+    "uuid": "d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+    "timestamp": "2026-02-08T02:47:02.913501Z",
+    "src_ip": "116.120.157.4",
+    "session": "54a802218b61",
+    "protocol": "ssh"
+  },
+  {
+    "eventid": "cowrie.command.input",
+    "input": "locate D877F783D5D3EF8Cs",
+    "message": "CMD: locate D877F783D5D3EF8Cs",
+    "sensor": "1d5da8138576",
+    "uuid": "d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+    "timestamp": "2026-02-08T02:47:03.229434Z",
+    "src_ip": "116.120.157.4",
+    "session": "54a802218b61",
+    "protocol": "ssh"
+  },
+  {
+    "eventid": "cowrie.command.input",
+    "input": "echo Hi | cat -n",
+    "message": "CMD: echo Hi | cat -n",
+    "sensor": "1d5da8138576",
+    "uuid": "d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+    "timestamp": "2026-02-08T02:47:03.448553Z",
+    "src_ip": "116.120.157.4",
+    "session": "54a802218b61",
+    "protocol": "ssh"
+  }
+]
