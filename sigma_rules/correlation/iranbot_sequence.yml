@@ -13,7 +13,7 @@ correlation:
   group-by:
     - src_ip
     - session
-  timespan: 1m
+  timespan: 2m
   condition:
     gte: 2  
 level: critical
