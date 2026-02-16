@@ -21,7 +21,7 @@ jobs:
 
       - name: Validate Standard Rules
         run: |
-          check-jsonschema --schemafile https://raw.githubusercontent.com/SigmaHQ/sigma-specification/main/json-schema/sigma-detection-rule-schema.json sigma_rules/standar/*.yml
+          check-jsonschema --schemafile https://raw.githubusercontent.com/SigmaHQ/sigma-specification/main/json-schema/sigma-detection-rule-schema.json sigma_rules/standard/*.yml
       
       - name: Validate Correlation Rules
         run: |
