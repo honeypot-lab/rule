@@ -15,8 +15,7 @@
 .
 ├── .github/workflows       # 룰 자동 검증 (Sigma-Linter)
 ├── analysis                # 공격별 상세 분석 보고서 및 로그 샘플
-│   ├── iranbot-malware     # Iranbot One-liner 배포 분석
-│   └── potential-miner     # 채굴기 유포 전 정찰 행위 분석
+│   └──  [Attack Cases]     # 개별 분석 사례 (상세 내용은 아래 표 참조)
 ├── sigma_rules             # 실제 운영 환경용 Sigma 룰 모음
 │   ├── standard            # 단일 이벤트 탐지 룰 (Atomic)
 │   └── correlation         # 상관관계 분석 룰 (Sequence)
