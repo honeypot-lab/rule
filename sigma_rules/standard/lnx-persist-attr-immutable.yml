@@ -1,0 +1,15 @@
+title: Standard - Immutable File Attribute Change
+id: e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b
+status: experimental
+logsource:
+  product: linux
+  category: honeypot
+  service: cowrie
+detection:
+  selection:
+    input|re: 'chattr\s+[-+]+[ia]+'
+  condition: selection
+level: high
+tags:
+    - attack.persistence
+    - attack.defense_evasion

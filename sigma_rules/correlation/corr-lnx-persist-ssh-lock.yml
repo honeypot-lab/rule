@@ -1,0 +1,24 @@
+title: Correlation - SSH Persistence and Lock Pattern
+id: f5a6b7c8-d9e0-4f1a-2b3c-4d5e6f7a8b9c
+status: experimental
+description: |
+    공격자가 SSH 침투 후 권한 지속을 위해 디렉토리를 생성하고, 
+    공개키를 주입한 뒤 chattr 명령어로 파일을 잠가 삭제를 방지하는 시퀀스를 탐지합니다.
+author: BISHOP1027
+date: 2026-02-19
+correlation:
+    type: temporal
+    rules:
+        - 2b9d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f     # 권한 변경 탐지(chmod +x) + rm -rf 파일 삭제 탐지
+        - d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a     # authorized_keys 파일 탐지
+        - e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b     # 파일 속성 고정(chattr)
+    group-by:
+        - session                                  # 동일 Cowrie 세션 내 행위 추적
+    timespan: 5m                                   # 자동화 스크립트 실행 시간 고려
+    condition: 
+        all: true                                  # 위 세 단계가 모두 발생 시
+level: critical
+tags:
+    - attack.persistence
+    - attack.defense_evasion
+    - attack.t1098.004

@@ -1,0 +1,22 @@
+title: Standard - SSH Authorized Keys File Manipulation
+id: d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a
+status: experimental
+description: |
+    공격자가 지속성 확보를 위해 authorized_keys 파일에 공개키를 주입하거나, 
+    기존 내용을 변조/삭제하는 행위를 탐지합니다.
+logsource:
+  product: linux
+  category: honeypot
+  service: cowrie
+detection:
+  selection:
+    # 파일 경로와 주요 조작 명령어 패턴 탐지 (정규표현식)
+    input|re: '.*authorized_keys.*'
+  filter:
+    # 단순 조회(ls) 등을 제외하고 싶다면 여기에 추가 (현재는 모든 접근 탐지)
+    input|contains: 'ls '
+  condition: selection and not filter
+level: medium
+tags:
+    - attack.persistence
+    - attack.t1098.004
