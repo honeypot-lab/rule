@@ -1,0 +1,29 @@
+title: Standard - Execution and Trace Cleanup Actions
+id: lnx-susp-exec-cleanup
+status: experimental
+description: |
+    Detects granting execution permissions, immediate shell execution, 
+    and file deletion (cleanup) to evade forensics.
+author: BISHOP1027
+date: 2026-02-18
+logsource:
+    product: linux
+    category: honeypot
+    service: cowrie
+detection:
+    selection_chmod:
+        - 'chmod 777*'
+        - 'chmod +x*'
+    selection_execution:
+        - '*; ./*'
+        - '*;./'
+        - '*&& ./*'
+        - 'sh ./*'
+    selection_cleanup:
+        - 'rm -rf *'
+        - 'rm -f *'
+    condition: 1 of selection_*
+level: medium
+tags:
+    - attack.execution      # T1059.004
+    - attack.defense_evasion # T1070.004 (Indicator Removal)

@@ -1,0 +1,15 @@
+title: Standard - Shell Sanity Check and Specific Discovery
+id: lnx-recon-sanity-check
+status: experimental
+logsource:
+  product: linux
+  category: honeypot
+  service: cowrie
+detection:
+  selection:
+    input|contains: 
+      - 'locate D877F783D5D3EF8Cs'
+      - '/ip cloud print'
+      - 'echo Hi | cat -n'
+  condition: selection
+level: medium

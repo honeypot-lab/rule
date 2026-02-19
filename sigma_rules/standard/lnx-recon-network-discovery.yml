@@ -1,0 +1,12 @@
+title: Standard - Network Discovery
+id: lnx-recon-network-discovery
+status: experimental
+logsource:
+  product: linux
+  category: honeypot
+  service: cowrie
+detection:
+  selection:
+    input|contains: 'ifconfig'
+  condition: selection
+level: low

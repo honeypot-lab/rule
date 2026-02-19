@@ -49,13 +49,26 @@
 
 ## 5. 탐지 전략 (Detection Strategy)
 
-### A. 통합 룰 활용 (Atomic Detection)
-- **파일명:** [`linux_shell_download_oneliner.yml`](../../sigma_rules/standard/linux_shell_download_oneliner.yml)
-- **설명:** 신규 탐지 지표인 `run.sh`와 `rm -rf` 행위를 룰에 반영하여 변종 공격을 탐지합니다.
+본 사례는 다중 디렉토리 순회 및 즉시 삭제(Cleanup)를 특징으로 하며, 이를 효과적으로 식별하기 위해 **계층형 탐지(Layered Detection)** 모델을 적용합니다.
 
-### B. 상관관계 분석 (Correlation Detection)
-- **파일명:** [`shell_download_execution_sequence.yml`](../../sigma_rules/correlation/shell_download_execution_sequence.yml)
-- **설명:** 파일 생성 직후 삭제되는 행위 패턴을 통해 자동화된 악성 스크립트 배포 시퀀스를 식별합니다.
+### A. 표준 이벤트 탐지 (Standard/Atomic Detection)
+공격의 각 구성 요소가 되는 행위 지표를 개별적으로 식별합니다.
+
+* **다중 경로 진입 탐지 ([`lnx-susp-writable-paths.yml`](../../sigma_rules/standard/lnx-susp-writable-paths.yml))**: `/tmp`, `/var/run`, `/mnt` 등 시스템 내 쓰기 가능한 모든 디렉토리를 순차적으로 탐색하는 시도를 포착합니다.
+* **도구 가용성 탐지 ([`lnx-susp-download-tools.yml`](../../sigma_rules/standard/lnx-susp-download-tools.yml))**: `wget`과 `curl`을 병행 사용하여 페이로드 반입 성공률을 높이려는 시도를 식별합니다.
+* **실행 및 안티 포렌식 탐지 ([`lnx-susp-exec-cleanup.yml`](../../sigma_rules/standard/lnx-susp-exec-cleanup.yml))**: 실행 권한 부여(`chmod +x`) 후 분석 방해를 위해 원본 파일을 즉시 삭제(`rm -rf`)하는 행위를 통합 탐지합니다.
+
+---
+
+### B. 상관관계 분석 (Correlation/Behavioral Detection)
+개별 행위의 조합을 통해 자동화된 '감염 및 증거 인멸' 시퀀스를 확정적으로 식별합니다.
+
+* **파일명**: [`corr-lnx-classic-dropper.yml`](../../sigma_rules/correlation/corr-lnx-classic-dropper.yml)
+* **탐지 로직**: 
+    1. 동일 세션 내에서 **다중 경로 순회**(`lnx-susp-writable-paths`) 확인
+    2. 5분(Timespan) 이내에 **복합 도구를 통한 다운로드**(`lnx-susp-download-tools`) 발생
+    3. 페이로드 실행 직후 **파일 삭제**(`lnx-susp-exec-cleanup`)가 이어지는 완전한 공격 사이클을 포착할 때 `Critical` 알람 생성
+* **효과**: 단순한 파일 조작 행위와 차별화하여, 공격자의 흔적 제거 시도(Anti-Forensics)를 오히려 강력한 감염 확정 증거로 활용합니다.
 
 ---
 

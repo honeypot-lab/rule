@@ -53,15 +53,26 @@
 
 ## 5. 탐지 전략 (Detection Strategy)
 
-본 사례는 수법의 공통성을 고려하여 통합된 **Defense-in-Depth** 탐지 모델을 적용합니다.
+본 사례는 공격의 개별 지표뿐만 아니라 행위의 선후 관계를 모두 포괄하는 **계층형 탐지(Layered Detection)** 모델을 적용합니다.
 
-### A. 개별 이벤트 탐지 (Atomic Detection)
-* **파일명:** [`linux_shell_download_oneliner.yml`](../../sigma_rules/standard/linux_shell_download_oneliner.yml)
-* **설명:** `ur0a.sh`, `cat.sh`와 같이 정형화된 봇넷 파일명과 `chmod 777` 등 위험한 권한 변경 행위를 개별적으로 식별합니다.
+### A. 표준 이벤트 탐지 (Standard/Atomic Detection)
+공격의 각 단계에서 발생하는 개별적인 위험 신호를 독립적으로 식별합니다.
 
-### B. 상관관계 분석 (Correlation Detection)
-* **파일명:** [`shell_download_execution_sequence.yml`](../../sigma_rules/correlation/shell_download_execution_sequence.yml)
-* **설명:** **`temporal_ordered`** 모델을 적용합니다. [다운로드 → 권한 변경 → 실행]으로 이어지는 일련의 행위가 동일 세션 내에서 순차적으로 발생할 경우, 이를 확정적 감염 단계로 분류하여 `Critical` 알람을 생성합니다.
+* **경로 진입 탐지 ([`lnx-susp-writable-paths.yml`](../../sigma_rules/standard/lnx-susp-writable-paths.yml))**: `/tmp` 등 쓰기 권한이 열린 디렉토리로 이동하여 공격 거점을 마련하는 행위를 포착합니다.
+* **도구 활용 탐지 ([`lnx-susp-download-tools.yml`](../../sigma_rules/standard/lnx-susp-download-tools.yml))**: 시스템 내장 도구(`wget`, `curl`)를 이용한 비정상적인 아웃바운드 페이로드 수신을 식별합니다.
+* **실행 및 은닉 탐지 ([`lnx-susp-exec-cleanup.yml`](../../sigma_rules/standard/lnx-susp-exec-cleanup.yml))**: `chmod 777`을 통한 권한 상승, 악성 스크립트 실행 및 `rm`을 이용한 흔적 제거 행위를 탐지합니다.
+
+---
+
+### B. 상관관계 분석 (Correlation/Behavioral Detection)
+개별 행위들이 조합되어 실제 침투 시나리오를 완성할 때 `Critical` 알람을 생성하여 관제 효율을 극대화합니다.
+
+* **파일명**: [`corr-lnx-classic-dropper.yml`](../../sigma_rules/correlation/corr-lnx-classic-dropper.yml)
+* **탐지 로직**: 
+    1.  동일 세션 내에서 **경로 진입**(`lnx-susp-writable-paths`) 이벤트 발생 확인
+    2.  설정된 시간(5분) 이내에 **페이로드 다운로드**(`lnx-susp-download-tools`) 징후 포착
+    3.  최종적으로 **실행 권한 부여 및 구동**(`lnx-susp-exec-cleanup`) 행위가 연달아 발생할 경우 탐지
+* **효과**: 단순히 `wget`을 사용하거나 `cd /tmp`를 수행하는 정상 관리자 행위와 차별화하여, **확정적 감염 시나리오**만을 정확히 타격합니다.
 
 ---
 

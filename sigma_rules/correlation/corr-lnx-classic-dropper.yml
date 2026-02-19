@@ -1,0 +1,24 @@
+title: Correlation - Classic Linux Dropper Pattern
+id: corr-lnx-classic-dropper
+status: experimental
+description: |
+    Detects the automated sequence of a classic Linux dropper: 
+    moving to a writable directory, downloading a payload via common tools (wget/curl/tftp/etc.), 
+    granting execution permissions, and cleaning up traces.
+author: BISHOP1027
+date: 2026-02-18
+action: correlation
+type: temporal
+rules:
+    - lnx-susp-writable-paths    # cd /tmp, /var/run 등 진입 탐지
+    - lnx-susp-download-tools    # wget, curl, tftp 등 다운로드 시도 탐지
+    - lnx-susp-exec-cleanup      # chmod, sh, rm -rf 등 실행 및 삭제 행위 탐지
+group-by:
+    - session                    # 동일 공격자 세션 내에서 발생한 행위 그룹화
+timespan: 5m                     # 통상적인 봇넷의 자동화 시퀀스 시간 (5분)
+condition: all                   # 3가지 Standard 룰이 모두 발생할 때 탐지
+level: critical
+tags:
+    - attack.execution
+    - attack.ingress_tool_transfer
+    - attack.defense_evasion

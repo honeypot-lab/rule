@@ -15,7 +15,7 @@
 .
 ├── .github/workflows       # 룰 자동 검증 (Sigma-Linter)
 ├── analysis                # 공격별 상세 분석 보고서 및 로그 샘플
-│   └──  [Attack Cases]     # 개별 분석 사례 (상세 내용은 아래 표 참조)
+│   └──  [Attack Cases]     # 개별 분석 사례 (아래 표 참조)
 ├── sigma_rules             # 실제 운영 환경용 Sigma 룰 모음
 │   ├── standard            # 단일 이벤트 탐지 룰 (Atomic)
 │   └── correlation         # 상관관계 분석 룰 (Sequence)
@@ -37,7 +37,7 @@
 
 ## 🤖 실시간 침해지표 알림 시스템 (Discord Integration)
 
-단순한 로그 누적을 넘어 탐지의 **실시간성(Real-time Visibility)**을 확보하기 위해, 직접 개발한 `Cowrie-Discord Alert Bot`을 연동하여 운영 중입니다.
+단순한 로그 누적을 넘어 탐지의 **실시간성(Real-time Visibility)** 을 확보하기 위해, 직접 개발한 `Cowrie-Discord Alert Bot`을 연동하여 운영 중입니다.
 
 ### 🛠️ 주요 기능 및 아키텍처
 * **실시간 로그 파싱:** `cowrie.json`에 기록되는 로우 데이터(Raw Data)를 Python 스크립트가 실시간으로 테일링(Tailing)하며 파싱합니다.

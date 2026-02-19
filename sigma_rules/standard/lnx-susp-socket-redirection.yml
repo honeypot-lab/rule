@@ -1,0 +1,16 @@
+title: Standard - Shell Socket Redirection
+id: lnx-susp-socket-redirection
+status: experimental
+logsource:
+    product: linux
+    category: honeypot
+    service: cowrie
+detection:
+    selection:
+        - '*/dev/tcp/*'
+        - 'exec *<>/dev/tcp/*'
+        - 'nohup bash -c *'  # 백그라운드 소켓 주입 대응
+        - 'cat 0<&6 >*'      # 소켓을 통한 파일 저장 행위
+        - 'echo -n * >&6'    # 소켓으로 데이터 전송 행위
+    condition: selection
+level: high  # 일반적인 환경에서 /dev/tcp 사용은 매우 드물기에 위험도를 높임

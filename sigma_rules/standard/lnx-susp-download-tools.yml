@@ -1,0 +1,10 @@
+title: Standard - Common Linux Download Tools
+id: lnx-susp-download-tools
+detection:
+    selection:
+        - 'wget'
+        - 'curl'
+        - 'tftp'
+        - 'ftpget'
+        - 'busybox'
+    condition: selection

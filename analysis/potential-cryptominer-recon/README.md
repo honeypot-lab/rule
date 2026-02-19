@@ -46,20 +46,26 @@
 
 ## 5. 탐지 전략 (Detection Strategy)
 
-이 공격 패턴을 효과적으로 탐지하기 위해 두 가지 단계의 Sigma 룰을 구성하였습니다.
+본 사례는 단일 명령어로는 오탐 가능성이 높은 정찰 행위들을 논리적으로 결합하여 탐지하는 **계층형 탐지(Layered Detection)** 모델을 적용합니다.
 
-### A. 개별 이벤트 탐지 (Atomic Detection)
-- **파일명:** [`miner_recon_events.yml`](../../sigma_rules/standard/miner_recon_events.yml)
-- **설명:** `/proc/cpuinfo` 접근이나 `ps | grep miner`와 같은 개별적인 정찰 행위를 식별합니다.
+### A. 표준 이벤트 탐지 (Standard/Atomic Detection)
+공격자가 침투 직후 수행하는 시스템 정보 수집 행위들을 개별적으로 식별합니다.
 
-### B. 상관관계 분석 (Correlation Detection)
-- **파일명:** [`miner_recon_sequence.yml`](../../sigma_rules/correlation/miner_recon_sequence.yml)
-- **설명:** 단일 명령어는 오탐의 소지가 있으므로, **5분 이내에 위 정찰 명령어 중 3개 이상이 동시에 발생**할 경우 고위험군으로 분류하여 알람을 생성합니다.
+* **자원 정찰 탐지 ([`lnx-recon-cpu-info.yml`](../../sigma_rules/standard/lnx-recon-cpu-info.yml))**: `/proc/cpuinfo` 조회를 통한 CPU 코어 및 성능 확인 행위를 포착합니다.
+* **네트워크 정찰 탐지 ([`lnx-recon-network-discovery.yml`](../../sigma_rules/standard/lnx-recon-network-discovery.yml))**: `ifconfig` 등을 이용한 인터페이스 및 내부망 구성 파악 시도를 식별합니다.
+* **경쟁 마이너 탐색 탐지 ([`lnx-recon-miner-check.yml`](../../sigma_rules/standard/lnx-recon-miner-check.yml))**: `ps`와 `grep`을 조합하여 시스템 내 타사 채굴기 존재 여부를 확인하는 행위를 탐지합니다.
+* **환경 건전성 확인 탐지 ([`lnx-recon-sanity-check.yml`](../../sigma_rules/standard/lnx-recon-sanity-check.yml))**: `echo Hi`, `locate` 등을 사용한 쉘 기능 테스트 및 MikroTik 장비 여부 확인 시도를 포착합니다.
 
-## 6. 대응 권고 사항
-- 불필요한 시스템 정보 노출을 최소화하기 위해 `/proc` 파일 시스템에 대한 접근 권한 제어.
-- `ifconfig`, `ps` 등 시스템 관리 도구에 대한 비정상적인 호출 모니터링 강화.
-- 알려진 공격 IP(`116.120.157.4`)에 대한 방화벽 차단 조치.
+---
+
+### B. 상관관계 분석 (Correlation/Behavioral Detection)
+짧은 시간 내에 발생하는 다수의 정찰 행위를 묶어 공격자의 최종 의도(채굴기 배포 준비)를 확정적으로 식별합니다.
+
+* **파일명**: [`corr-lnx-miner-recon-chain.yml`](../../sigma_rules/correlation/corr-lnx-miner-recon-chain.yml)
+* **탐지 로직**: 
+    1. 동일 세션 내에서 위 4가지 **표준 정찰 이벤트**가 독립적으로 발생함
+    2. 5분(Timespan) 이내에 서로 다른 **정찰 행위 중 3개 이상**이 집중될 경우 탐지
+* **효과**: 관리자의 정상적인 시스템 점검(단발성 `ps`나 `ifconfig` 사용)과 공격자의 자동화된 정찰 시퀀스를 명확히 구분하여 알람 피로도를 획기적으로 낮춥니다.
 
 ---
 **Authored by**: [@BISHOP1027](https://github.com/BISHOP1027)

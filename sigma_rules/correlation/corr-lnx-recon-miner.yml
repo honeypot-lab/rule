@@ -1,0 +1,25 @@
+title: Correlation - Cryptominer Reconnaissance Activity Sequence
+id: correlation-recon-activity-chain
+status: experimental
+description: |
+    동일 세션에서 시스템 리소스 확인, 네트워크 정찰, 경쟁 마이너 탐색 및 
+    쉘 테스트 구문이 연달아 발생하는 공격 시퀀스를 탐지합니다.
+author: BISHOP1027
+date: 2026-02-14
+action: correlation
+type: temporal
+rules:
+    - lnx-recon-cpu-info          # cat /proc/cpuinfo 탐지
+    - lnx-recon-network-discovery  # ifconfig 탐지
+    - lnx-recon-miner-check        # ps | grep miner 탐지
+    - lnx-recon-sanity-check       # /ip cloud, locate, echo Hi 탐지
+group-by:
+    - session       # Cowrie 로그의 세션 필드 기준
+    - src_ip        # 공격자 IP 기준
+timespan: 5m        # 5분 이내에 발생 (로그상으론 3초 내에 발생)
+condition: 3 of rules # 위 4가지 Standard 룰 중 3개 이상이 매칭될 때
+level: high
+tags:
+    - attack.discovery
+    - attack.t1082 # System Information Discovery
+    - attack.t1016 # System Network Configuration Discovery

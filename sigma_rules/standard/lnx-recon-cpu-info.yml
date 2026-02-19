@@ -1,0 +1,12 @@
+title: Standard - CPU Resource Reconnaissance
+id: lnx-recon-cpu-info
+status: experimental
+logsource:
+  product: linux
+  category: honeypot
+  service: cowrie
+detection:
+  selection:
+    input|contains: '/proc/cpuinfo'
+  condition: selection
+level: low

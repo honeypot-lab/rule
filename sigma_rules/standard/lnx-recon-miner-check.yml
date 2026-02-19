@@ -1,0 +1,14 @@
+title: Standard - Competing Miner Process Search
+id: lnx-recon-miner-check
+status: experimental
+logsource:
+  product: linux
+  category: honeypot
+  service: cowrie
+detection:
+  selection:
+    input|contains|all:
+      - 'ps'
+      - 'miner'
+  condition: selection
+level: medium

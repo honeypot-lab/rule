@@ -1,0 +1,23 @@
+title: Correlation - Advanced Shell Socket Payload Injection
+id: corr-lnx-socket-injection
+status: experimental
+description: |
+    Detects advanced fileless-style attacks that bypass wget/curl by using 
+    Bash internal /dev/tcp sockets to download and execute payloads in the background.
+author: BISHOP1027
+date: 2026-02-18
+action: correlation
+type: temporal
+rules:
+    - lnx-susp-socket-redirection    # /dev/tcp, exec 소켓 조작 탐지
+    - lnx-susp-writable-paths        # /tmp 등 저장 경로 진입 탐지
+    - lnx-susp-exec-cleanup          # nohup, chmod, 실행 행위 탐지
+group-by:
+    - session                        # 동일 세션 내 행위 추적
+timespan: 5m
+condition: lnx-susp-socket-redirection and (lnx-susp-writable-paths or lnx-susp-exec-cleanup)
+level: critical
+tags:
+    - attack.execution
+    - attack.command_and_control
+    - attack.defense_evasion
