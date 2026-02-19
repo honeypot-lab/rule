@@ -18,7 +18,7 @@ correlation:
         - src_ip
     timespan: 5m
     condition:
-        count(rules) >= 3  # 위 4가지 룰 중 3개 이상이 매칭될 때
+        gte: 3  # 위 4가지 룰 중 3개 이상이 매칭될 때
 level: high
 tags:
     - attack.discovery

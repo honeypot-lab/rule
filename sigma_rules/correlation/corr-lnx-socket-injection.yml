@@ -15,7 +15,8 @@ correlation:
     group-by:
         - session
     timespan: 5m
-    condition: all  # 소켓 조작, 경로 진입, 실행 행위가 모두 발생할 때
+    condition: 
+        all: true  # 소켓 조작, 경로 진입, 실행 행위가 모두 발생할 때
 level: critical
 tags:
     - attack.execution

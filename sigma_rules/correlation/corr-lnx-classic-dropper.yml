@@ -16,7 +16,8 @@ correlation:
     group-by:
         - session                    # 동일 공격자 세션 내에서 발생한 행위 그룹화
     timespan: 5m                     # 통상적인 봇넷의 자동화 시퀀스 시간 (5분)
-    condition: all                   # 3가지 Standard 룰이 모두 발생할 때 탐지
+    condition: 
+        all: ture                   # 3가지 Standard 룰이 모두 발생할 때 탐지
 level: critical
 tags:
     - attack.execution
