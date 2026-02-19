@@ -1,5 +1,5 @@
 title: Correlation - Classic Linux Dropper Pattern
-id: corr-lnx-classic-dropper
+id: 8b3c4d5e-2a1b-4f6a-9c8d-7e6f5a4b3c2d
 status: experimental
 description: |
     Detects the automated sequence of a classic Linux dropper: 

@@ -1,5 +1,5 @@
 title: Correlation - Advanced Shell Socket Payload Injection
-id: corr-lnx-socket-injection
+id: a1b2c3d4-e5f6-4987-bcde-0f1e2d3c4b5a
 status: experimental
 description: |
     Detects advanced fileless-style attacks that bypass wget/curl by using 
