@@ -9,9 +9,9 @@ date: 2026-02-18
 action: correlation
 type: temporal
 rules:
-    - lnx-susp-socket-redirection    # /dev/tcp, exec 소켓 조작 탐지
-    - lnx-susp-writable-paths        # /tmp 등 저장 경로 진입 탐지
-    - lnx-susp-exec-cleanup          # nohup, chmod, 실행 행위 탐지
+    - de305d54-75b4-431b-adb2-eb6b9e546014    # /dev/tcp, exec 소켓 조작 탐지
+    - c9a8b7c6-d5e4-4f3g-h2i1-j0k9l8m7n6o5    # /tmp 등 저장 경로 진입 탐지
+    - 2b9d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f    # nohup, chmod, 실행 행위 탐지
 group-by:
     - session                        # 동일 세션 내 행위 추적
 timespan: 5m

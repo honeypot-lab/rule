@@ -9,10 +9,10 @@ date: 2026-02-14
 action: correlation
 type: temporal
 rules:
-    - lnx-recon-cpu-info          # cat /proc/cpuinfo 탐지
-    - lnx-recon-network-discovery  # ifconfig 탐지
-    - lnx-recon-miner-check        # ps | grep miner 탐지
-    - lnx-recon-sanity-check       # /ip cloud, locate, echo Hi 탐지
+    - a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d         # cat /proc/cpuinfo 탐지
+    - 7d2f9a1b-3c4d-4e5f-af60-1a2b3c4d5e6f         # ifconfig 탐지
+    - f47ac10b-58cc-4372-a567-0e02b2c3d479         # ps | grep miner 탐지
+    - 8e3a2b1c-0d9e-4f8a-bc7d-6e5f4a3b2c1d         # /ip cloud, locate, echo Hi 탐지
 group-by:
     - session       # Cowrie 로그의 세션 필드 기준
     - src_ip        # 공격자 IP 기준

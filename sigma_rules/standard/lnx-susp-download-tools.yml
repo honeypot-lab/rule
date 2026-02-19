@@ -1,5 +1,5 @@
 title: Standard - Common Linux Download Tools
-id: lnx-susp-download-tools
+id: 5f9e2b34-8c9a-4e12-b567-f0123456789a
 detection:
     selection:
         - 'wget'

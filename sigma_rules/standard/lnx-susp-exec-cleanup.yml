@@ -1,5 +1,5 @@
 title: Standard - Execution and Trace Cleanup Actions
-id: lnx-susp-exec-cleanup
+id: 2b9d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f
 status: experimental
 description: |
     Detects granting execution permissions, immediate shell execution, 
