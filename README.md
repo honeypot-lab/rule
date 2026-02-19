@@ -27,6 +27,7 @@
 ## 🛡️ 주요 분석 사례 (Key Analysis)
 | 분석 사례 (Attack Cases) | 위협 수준 | 관련 TTPs | 상세 보고서 |
 |:--- |:---:|:---|:---:|
+| **SSH Persistence & File Locking** | `Critical` | T1098.004, T1564.004, T1053.003 | [🔗 보러가기](./analysis/persistence_chain/README.md) |
 | **Background Socket Injection** | `Critical` | T1059.004, T1105, T1070.004 | [🔗 보러가기](./analysis/background-socket-injection/README.md) |
 | **Iranbot Malware Deployment** | `Critical` | T1059.004, T1105 | [🔗 보러가기](./analysis/iranbot-malware/README.md) |
 | **High-Risk Multi-Path Delivery** | `Critical` | T1070.004, T1105 | [🔗 보러가기](./analysis/multi-path-delivery-cleanup/README.md) |
