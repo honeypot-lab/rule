@@ -1,5 +1,9 @@
 title: Standard - Common Linux Download Tools
 id: 5f9e2b34-8c9a-4e12-b567-f0123456789a
+logsource:
+    product: linux
+    category: honeypot
+    service: cowrie
 detection:
     selection:
         - 'wget'
