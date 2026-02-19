@@ -6,20 +6,21 @@ description: |
     쉘 테스트 구문이 연달아 발생하는 공격 시퀀스를 탐지합니다.
 author: BISHOP1027
 date: 2026-02-14
-action: correlation
-type: temporal
-rules:
-    - a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d         # cat /proc/cpuinfo 탐지
-    - 7d2f9a1b-3c4d-4e5f-af60-1a2b3c4d5e6f         # ifconfig 탐지
-    - f47ac10b-58cc-4372-a567-0e02b2c3d479         # ps | grep miner 탐지
-    - 8e3a2b1c-0d9e-4f8a-bc7d-6e5f4a3b2c1d         # /ip cloud, locate, echo Hi 탐지
-group-by:
-    - session       # Cowrie 로그의 세션 필드 기준
-    - src_ip        # 공격자 IP 기준
-timespan: 5m        # 5분 이내에 발생 (로그상으론 3초 내에 발생)
-condition: 3 of rules # 위 4가지 Standard 룰 중 3개 이상이 매칭될 때
+correlation:
+    type: temporal
+    rules:
+        - a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d  # lnx-recon-cpu-info
+        - 7d2f9a1b-3c4d-4e5f-af60-1a2b3c4d5e6f  # lnx-recon-network-discovery
+        - f47ac10b-58cc-4372-a567-0e02b2c3d479  # lnx-recon-miner-check
+        - 8e3a2b1c-0d9e-4f8a-bc7d-6e5f4a3b2c1d  # lnx-recon-sanity-check
+    group-by:
+        - session
+        - src_ip
+    timespan: 5m
+    condition:
+        count(rules) >= 3  # 위 4가지 룰 중 3개 이상이 매칭될 때
 level: high
 tags:
     - attack.discovery
-    - attack.t1082 # System Information Discovery
-    - attack.t1016 # System Network Configuration Discovery
+    - attack.t1082
+    - attack.t1016

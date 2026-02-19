@@ -6,16 +6,16 @@ description: |
     Bash internal /dev/tcp sockets to download and execute payloads in the background.
 author: BISHOP1027
 date: 2026-02-18
-action: correlation
-type: temporal
-rules:
-    - de305d54-75b4-431b-adb2-eb6b9e546014    # /dev/tcp, exec 소켓 조작 탐지
-    - d1e2f3a4-b5c6-47d8-9e0f-1a2b3c4d5e6f    # /tmp 등 저장 경로 진입 탐지
-    - 2b9d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f    # nohup, chmod, 실행 행위 탐지
-group-by:
-    - session                        # 동일 세션 내 행위 추적
-timespan: 5m
-condition: lnx-susp-socket-redirection and (lnx-susp-writable-paths or lnx-susp-exec-cleanup)
+correlation:
+    type: temporal
+    rules:
+        - de305d54-75b4-431b-adb2-eb6b9e546014    # lnx-susp-socket-redirection
+        - d1e2f3a4-b5c6-47d8-9e0f-1a2b3c4d5e6f    # lnx-susp-writable-paths
+        - 2b9d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f    # lnx-susp-exec-cleanup
+    group-by:
+        - session
+    timespan: 5m
+    condition: all  # 소켓 조작, 경로 진입, 실행 행위가 모두 발생할 때
 level: critical
 tags:
     - attack.execution
