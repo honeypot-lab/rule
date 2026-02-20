@@ -9,13 +9,17 @@ logsource:
   category: honeypot
   service: cowrie
 detection:
-  selection:
-    # 파일 경로와 주요 조작 명령어 패턴 탐지 (정규표현식)
-    input|re: '.*authorized_keys.*'
-  filter:
-    # 단순 조회(ls) 등을 제외하고 싶다면 여기에 추가 (현재는 모든 접근 탐지)
-    input|contains: 'ls '
-  condition: selection and not filter
+  # 탐지: authorized_keys에 대한 쓰기/삽입/변조 행위 (추측성 조회 제외)
+  selection_write:
+    - input|re: 'echo\s+.+?\s*>>\s*~?/.ssh/authorized_keys'
+    - input|re: 'cat\s+\S+\s*>>\s*~?/.ssh/authorized_keys'
+    - input|re: 'sed\s+-i\s+.*~?/.ssh/authorized_keys'
+    - input|re: 'install\s+-m\s+\d+\s+\S+\s+~?/.ssh/authorized_keys'
+  # ignore read-only accesses like 'cat ~/.ssh/authorized_keys' or 'ls -la ~/.ssh'
+  selection_read:
+    - input|re: 'cat\s+~?/.ssh/authorized_keys$'
+    - input|re: 'ls\s+-l.*~?/.ssh/authorized_keys'
+  condition: selection_write and not selection_read
 level: medium
 tags:
     - attack.persistence

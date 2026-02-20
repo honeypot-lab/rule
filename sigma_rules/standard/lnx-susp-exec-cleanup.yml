@@ -11,18 +11,21 @@ logsource:
     category: honeypot
     service: cowrie
 detection:
-    selection_chmod:
-        - 'chmod 777*'
-        - 'chmod +x*'
-    selection_execution:
-        - '*; ./*'
-        - '*;./'
-        - '*&& ./*'
-        - 'sh ./*'
+    # prefer detecting chmod followed by immediate execution in same command or short chain
+    selection_chmod_exec:
+        - input|re: 'chmod\s+\+x\s+\S+\s*&&\s*\./\S+'
+        - input|re: 'chmod\s+\+x\s+\S+\s*;\s*\./\S+'
+        - input|re: 'chmod\s+\+x\s+\S+\s*&&\s*sh\s+\S+'
     selection_cleanup:
-        - 'rm -rf *'
-        - 'rm -f *'
-    condition: 1 of selection_*
+        - input|re: 'rm\s+-rf\s+\S+'
+        - input|re: 'rm\s+-f\s+\S+'
+    # additional lightweight execution indicators (for correlation with cleanup)
+    selection_exec_simple:
+        - input|re: '\./\S+'
+        - input|re: 'sh\s+\S+'
+
+    # flag if chmod+exec sequence OR cleanup commands occurring together with execution
+    condition: selection_chmod_exec or (selection_cleanup and selection_exec_simple)
 level: medium
 tags:
     - attack.execution      # T1059.004

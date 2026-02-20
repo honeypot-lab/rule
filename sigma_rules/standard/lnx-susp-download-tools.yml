@@ -5,10 +5,10 @@ logsource:
     category: honeypot
     service: cowrie
 detection:
-    selection:
-        - 'wget'
-        - 'curl'
-        - 'tftp'
-        - 'ftpget'
-        - 'busybox'
-    condition: selection
+    selection_download:
+        - input|re: '\bwget\s+https?://'
+        - input|re: '\bcurl\s+(-sS|--silent|-o|-O|https?://)'
+        - input|re: '\btftp\s+(-g|-l|\s)'
+        - input|re: '\bftpget\b'
+        - input|re: '\bbusybox\s+(wget|curl|tftp|ftpget)\b'
+    condition: selection_download
